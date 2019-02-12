@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V1</title>
+	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -30,7 +30,7 @@
 					<img src="../static/images/img-01.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="{{ url_for('otp') }}" method="POST">
 					<span class="login100-form-title">
 						Student Login
 					</span>
@@ -68,24 +68,19 @@
 					</div>
 					
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit">
 							Continue
 						</button>
 					</div>
-
-					<div class="text-center p-t-50" />
+					<div class="text-center p-t-50"></div>
 				</form>
-			</div>
-			<div class="text-center p-t-12">
-				<span class="txt1">
-					A Student Counselling Cell & PEC initiative
-				</span>
+				<div class="text-center p-t-12"> </div>
 			</div>
 		</div>
 	</div>
 	
 	
-
+	
 	
 <!--===============================================================================================-->	
 	<script src="../static/vendor/jquery/jquery-3.2.1.min.js"></script>

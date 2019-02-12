@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>DASS21</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../static/images/icons/favicon.ico" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+	<!--===============================================================================================-->
+</head>
+
+<body>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="dass21-form-title">
+					<h1>
+						DASS21
+					</h1>
+				</div>
+
+				<div class="text-left p-t-10">
+					<p class="txt3" style="text-align: justify">
+						Please read each statement and circle a number 0, 1, 2 or 3
+						which indicates how much the statement applied to you over the past week.
+						There are no right or wrong answers. Do not spend too much time on any statement.
+					</p>
+
+					<br />
+
+					<p class="txt3">
+						The rating scale is as follows:
+					</p>
+
+					<br />
+
+					<ol class="txt3 p-b-20" start="0">
+						<li>Applied to me to some degree, or some of the time</li>
+						<li>Did not apply to me at all</li>
+						<li>Applied to me to a considerable degree or a good part of time</li>
+						<li>Applied to me very much or most of the time</li>
+					</ol>
+
+					<hr />
+
+					<form class=" p-t-20" action="{{ url_for('submission') }}" method="POST">
+
+						<div class="question-group txt3">
+							<div class="index"> </div>
+
+							<div class="statement-group text-up title p-l-17">
+								<h5>Statement</h5>
+							</div>
+
+							<div class="choice-group text-up title p-l-44">
+								<h5>Severity</h5>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									1.
+								</div>
+
+								<div class="statement-group">
+									I found it hard to wind down
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-1" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-1" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-1" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-1" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									2.
+								</div>
+
+								<div class="statement-group">
+									I was aware of dryness in my mouth
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-2" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-2" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-2" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-2" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									3.
+								</div>
+
+								<div class="statement-group">
+									I couldn't seem to experience any positive feeling at all
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-3" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-3" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-3" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-3" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									4.
+								</div>
+
+								<div class="statement-group">
+									I experienced breathing difficulty (e.g. excessively rapid breathing,
+									breathlessness in the absence of physical exertion)
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-4" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-4" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-4" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-4" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									5.
+								</div>
+
+								<div class="statement-group">
+									I found it difficult to work up the initive to do things
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-5" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-5" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-5" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-5" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									6.
+								</div>
+
+								<div class="statement-group">
+									I tended to over-react to situations
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-6" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-6" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-6" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-6" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										37 </label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									7.
+								</div>
+
+								<div class="statement-group">
+									I experienced trembling (e.g. in the hands)
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-7" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-7" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-7" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-7" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									8.
+								</div>
+
+								<div class="statement-group">
+									I felt that I was using a lot of nervous energy
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-8" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-8" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-8" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-8" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									9.
+								</div>
+
+								<div class="statement-group">
+									I was worried about the situations in which I might panic and make a fool of myself
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-9" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-9" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-9" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-9" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									10.
+								</div>
+
+								<div class="statement-group">
+									I felt that I had nothing to look forward to
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-10" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-10" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										11
+									</label>
+									<label>
+										<input type="radio" name="group-10" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-10" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									11.
+								</div>
+
+								<div class="statement-group">
+									I found myself getting agitated
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-11" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-11" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-11" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-11" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									12.
+								</div>
+
+								<div class="statement-group">
+									I found it difficult to relax
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-12" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-12" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-12" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-12" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									13.
+								</div>
+
+								<div class="statement-group">
+									I felt downhearted and blue
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-13" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-13" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-13" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-13" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									14.
+								</div>
+
+								<div class="statement-group">
+									I was intolerant of anything that kept me from getting on with what I was doing
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-14" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-14" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-14" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-14" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									15.
+								</div>
+
+								<div class="statement-group">
+									I felt I was close to panic
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-15" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-15" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-15" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-15" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									16.
+								</div>
+
+								<div class="statement-group">
+									I was unable to become enthusiactic about anything
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-16" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-16" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-16" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-16" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									17.
+								</div>
+
+								<div class="statement-group">
+									I felt that I wasn't much as a person
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-17" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-17" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-17" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-17" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									18.
+								</div>
+
+								<div class="statement-group">
+									I felt that I was rather touchy
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-18" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-18" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-18" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-18" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									19.
+								</div>
+
+								<div class="statement-group">
+									I was aware of the action of my heart in the absence of physical
+									exertion (e.g. sense of heart rate increase, heart missing a beat)
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-19" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-19" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-19" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-19" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									20.
+								</div>
+
+								<div class="statement-group">
+									I felt scared without any good reason
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-20" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-20" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-20" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-20" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+
+							<div class="boxed">
+								<div class="index">
+									21.
+								</div>
+
+								<div class="statement-group">
+									I felt that life was meaningless
+								</div>
+
+								<div class="choice-group">
+									<label>
+										<input type="radio" name="group-21" value="0"
+											aria-label="Option 1 for aforementioned text input" />
+										0
+									</label>
+									<label>
+										<input type="radio" name="group-21" value="1"
+											aria-label="Option 2 for aforementioned text input" />
+										1
+									</label>
+									<label>
+										<input type="radio" name="group-21" value="2"
+											aria-label="Option 3 for aforementioned text input" />
+										2
+									</label>
+									<label>
+										<input type="radio" name="group-21" value="3"
+											aria-label="Option 4 for aforementioned text input" />
+										3
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group m-t-40" style="width:100%;">
+							<i class="fa fa-pencil prefix" style="color:#666666;">
+
+								<label class="txt3 p-b-10">
+									Comments
+								</label>
+
+								<textarea class="txt3 form-control" rows="3" cols="50"
+									placeholder="Write about anything else bothering you or anything you want to let us know. . ."></textarea>
+							</i>
+						</div>
+
+						<div class="container-login100-form-btn m-t-10 m-b-10" style="width: 20%">
+							<button class="login100-form-btn" type="submit">
+								Submit
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!--===============================================================================================-->
+	<script src="../static/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="../static/vendor/bootstrap/js/popper.js"></script>
+	<script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="../static/vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="../static/js/main.js"></script>
+
+</body>
+
+</html>
