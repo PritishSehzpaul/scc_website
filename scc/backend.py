@@ -1,49 +1,37 @@
-from flask import Flask, render_template, redirect, url_for, request
+"""
+backend.py file containing functions that perform operations on data
+"""
+import random
 
-app = Flask('scc')
+def calc_score(request=None):
+    """
+    Calculates the score of a student who takes the questionnaire
+    :return: a map with 3 keys i.e. 'stress', 'anxiety', 'depression' where key is string and value is int (score)
+    """
 
-###  routes for webpages
-LOGIN = 'login'                 # login --> /login/
-OTP = 'otp'                     # otp --> /otp/
-DASS21 = 'dass21'               # dass21 --> /dass21/
-SUBMISSION = 'submission'       # submission --> /submission/
+    stress_set = [1, 6, 8, 11, 12, 14, 18]
+    anxiety_set = [2, 4, 7, 9, 15, 19, 20]
+    depression_set = [3, 5, 10, 13, 16, 17, 21]
+    # question_set = {'stress': stress_set, 'anxiety': anxiety_set, 'depression': depression_set}
+    selected_option_set = []
+    score_set = {'stress': 0, 'anxiety': 0, 'depression': 0}
 
+    for i in range(1, 22):
+        if request.form.get('group-' + str(i)) is None:
+            val = 0
+        else:
+            val = int(request.form.get('group-' + str(i)))
 
-@app.route('/', methods=['GET', 'POST'])
-def main():
-    return redirect(url_for(LOGIN), code=302)     # because 302 is code for redirection
+        selected_option_set.append(val)
+        if i in stress_set:
+            score_set['stress'] += val
+        elif i in anxiety_set:
+            score_set['anxiety'] += val
+        else:
+            score_set['depression'] += val
 
-
-@app.route('/login/', methods=['GET', 'POST'])
-def login():
-    return render_template('index.html')
-
-
-@app.route('/otp/', methods=['GET', 'POST'])
-def otp():
-    if request.method == 'POST':
-        return render_template('otp.html')
-    else:
-        return redirect(url_for(LOGIN), code=302)
-
-
-@app.route('/dass21/', methods=['GET', 'POST'])
-def dass21():
-    if request.method == 'POST':
-        return render_template('dass21.html')
-    else:
-        return redirect(url_for(LOGIN), code=302)
+    return score_set
 
 
-@app.route('/submission/', methods=['GET', 'POST'])
-def submission():
-    if request.method == 'POST':
-        return render_template('submission.html')
-    else:
-        return redirect(url_for(LOGIN), code=302)
-
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+def generateOTP():
+    return random.SystemRandom().randint(100000, 999999)

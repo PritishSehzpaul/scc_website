@@ -58,7 +58,7 @@
 
 					<hr />
 
-					<form class=" p-t-20" action="{{ url_for('submission') }}" method="POST">
+					<form class=" p-t-20" action="{{ url_for(SUBMISSION) }}" method="POST">
 
 						<div class="question-group txt3">
 							<div class="index"> </div>
@@ -265,7 +265,8 @@
 									<label>
 										<input type="radio" name="group-6" value="3"
 											aria-label="Option 4 for aforementioned text input" />
-										37 </label>
+										3
+									</label>
 								</div>
 							</div>
 
@@ -773,7 +774,7 @@
 									Comments
 								</label>
 
-								<textarea class="txt3 form-control" rows="3" cols="50"
+								<textarea class="txt3 form-control" rows="3" cols="50" name="comments"
 									placeholder="Write about anything else bothering you or anything you want to let us know. . ."></textarea>
 							</i>
 						</div>

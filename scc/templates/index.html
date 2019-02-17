@@ -30,13 +30,13 @@
 					<img src="../static/images/img-01.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" action="{{ url_for('otp') }}" method="POST">
+				<form class="login100-form validate-form" action="{{ url_for(OTP) }}" method="POST">
 					<span class="login100-form-title">
 						Student Login
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "SID is required: XXXXXX">
-						<input class="input100" type="text" name="sid" placeholder="SID">
+						<input class="input100" type="text" name="sid" placeholder="SID" autofocus>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-id-badge" aria-hidden="true"></i>

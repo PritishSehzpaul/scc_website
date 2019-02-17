@@ -104,7 +104,6 @@ textarea {
 textarea:focus, input:focus {
   border-color: #e2e2e2 !important;
   border-width: 2px;
-  box-shadow: 5px 5px 5px 5px #e2e2e2;
 }
 
 input:focus::-webkit-input-placeholder { color:transparent; }
@@ -481,6 +480,10 @@ iframe {
 }
 
 .login100-form-btn:hover {
+  background: #333333;
+}
+
+.login100-form-btn:focus {
   background: #333333;
 }
 
