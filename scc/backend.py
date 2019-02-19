@@ -35,3 +35,45 @@ def calc_score(request=None):
 
 def generateOTP():
     return random.SystemRandom().randint(100000, 999999)
+
+
+def validateOTP(request, otp):
+    otp_entered = request.form.get('otp')
+    if otp_entered is not None:
+        try:
+            otp_entered = int(otp_entered)
+            if otp == otp_entered:
+                return True
+            else:
+                return False
+        except ValueError as e:
+            print('{} cannot be converted to integer. Entered value contains a character.\nError: {}'
+                  .format(otp_entered, e))
+            return False
+
+
+def addUser(request=None, session=None):
+    if request is None or session is None:
+        return None
+    else:
+        session['sid'] = request.form.get('sid')
+        session['name'] = request.form.get('name')
+        session['email'] = request.form.get('email')
+        session['contact'] = request.form.get('contact')
+
+
+def removeUser(session=None):
+    if session is None:
+        return None
+
+    del session['sid']
+    del session['email']
+    del session['contact']
+    del session['name']
+    del session['otp_validated']
+    del session['otp_sent']
+
+    print('REMOVE USER FUNCTION\n\n')
+    print('otp_sent' in session)
+    print('\n\n')
+
