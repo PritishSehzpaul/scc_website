@@ -56,10 +56,10 @@ def addUser(request=None, session=None):
     if request is None or session is None:
         return None
     else:
-        session['sid'] = request.form.get('sid')
-        session['name'] = request.form.get('name')
-        session['email'] = request.form.get('email')
-        session['contact'] = request.form.get('contact')
+        session['sid'] = request.form.get('sid').strip()
+        session['name'] = request.form.get('name').strip()
+        session['email'] = request.form.get('email').strip()
+        session['contact'] = request.form.get('contact').strip()
 
 
 def removeUser(session=None):

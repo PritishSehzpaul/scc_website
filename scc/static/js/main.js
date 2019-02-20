@@ -33,6 +33,31 @@
                 return false;
             }
         }
+
+        if($(input).attr('name') == 'name') {
+            return /^[A-Za-z\s]+$/.test($(input).val().trim());
+
+        }
+
+        if($(input).attr('name') == 'contact') {
+            return /^([0|\+[0-9]{1,3})?([7-9][0-9]{9})$/.test($(input).val().trim());
+
+        }
+
+        if($(input).attr('name') == 'sid') {
+            if($(input).val().trim().length == 8 && /^[0-9]+$/.test($(input).val().trim()))
+                return true;
+            else
+                return false;
+        }
+
+        if($(input).attr('name') == 'otp') {
+            if($(input).val().trim().length == 6 && /^[0-9]+$/.test($(input).val().trim()))
+                return true;
+            else
+                return false;
+        }
+
         else {
             if($(input).val().trim() == ''){
                 return false;
