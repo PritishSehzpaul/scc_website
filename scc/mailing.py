@@ -3,6 +3,8 @@ import ssl
 from config.configuration import Configuration
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 
 
 # TODO add a check whether the email was received by the client
@@ -113,3 +115,89 @@ def mailScore(session, recipient, score_set=None, comments=None,  subject='Score
     message.attach(html_part)
 
     mail(recipient, message)
+
+
+## Might be used in future when we have better translation between webpage and pdf. Not to be used until then
+# def mailScore_PDF(session, recipient, score_set=None, comments=None,  subject='Score of Student'):
+#     user_email = session['email']
+#     user_name = session['name']
+#     user_contact = session['contact']
+#     user_sid = session['sid']
+#
+#     message = MIMEMultipart('alternative')
+#     message['Subject'] = subject
+#     message['From'] = SENDER_EMAIL
+#     message['To'] = recipient
+#
+#     text = """\
+#         Hello Mam,
+#         The score of student {name} is:-
+#             1. Stress Score:  {stress}
+#             2. Anxiety Score: {anxiety}
+#             3. Depression:    {depression}
+#
+#         Student Details:
+#         Name:     {name}
+#         SID:      {sid}
+#         Contact:  {contact}
+#         Email Id: {email}
+#
+#         Additional Comments by Student: {comments}
+#         """
+#     html = """\
+#         <html>
+#             <body>
+#                 <p>Hello Mam,<br/>
+#                 The score of student {name} is:- <br/>
+#                 &nbsp;&nbsp;&nbsp;&nbsp;1. Stress Score: &nbsp;&nbsp;<strong>{stress}</strong> <br/>
+#                 &nbsp;&nbsp;&nbsp;&nbsp;2. Anxiety Score: &nbsp;<strong>{anxiety}</strong> <br/>
+#                 &nbsp;&nbsp;&nbsp;&nbsp;3. Depression: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>{depression}</strong> <br/>
+#                     <br/>
+#                 Student Details: <br/>
+#                 Name: &nbsp;&nbsp;&nbsp;&nbsp;<strong>{name}</strong> <br/>
+#                 SID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>{sid}</strong> <br/>
+#                 Contact: &nbsp;<strong>{contact}</strong> <br/>
+#                 Email Id: <strong>{email}</strong> <br/>
+#                 <br/>
+#                 <i>Additional Comments by Student: {comments}</i><br/>
+#                 </p>
+#             </body>
+#         </html>"""
+#
+#     if comments is None:
+#         comments = 'NA'
+#
+#     # TODO add the code segment to replace the student details
+#     text = text.format(stress=score_set['stress'], anxiety=score_set['anxiety'], depression=score_set['depression'],
+#                        name=user_name, sid=user_sid, contact=user_contact, email=user_email, comments=comments)
+#     html = html.format(stress=score_set['stress'], anxiety=score_set['anxiety'], depression=score_set['depression'],
+#                        name=user_name, sid=user_sid, contact=user_contact, email=user_email, comments=comments)
+#     text_part = MIMEText(text, 'plain')
+#     html_part = MIMEText(html, 'html')
+#     message.attach(text_part)
+#     message.attach(html_part)
+#
+#     ## Attaching the pdf attachment
+#     filename = "static/submissions/" + session['sid'] + '.pdf'
+#
+#     # Open PDF file in binary mode
+#     with open(filename, "rb") as attachment:
+#         # Add file as application/octet-stream
+#         # Email client can usually download this automatically as attachment
+#         part = MIMEBase("application", "octet-stream")
+#         part.set_payload(attachment.read())
+#
+#     # Encode file in ASCII characters to send by email
+#     encoders.encode_base64(part)
+#
+#     # Add header as key/value pair to attachment part
+#     part.add_header(
+#         "Content-Disposition",
+#         f"attachment; filename= {filename}",
+#     )
+#
+#     # Add attachment to message
+#     message.attach(part)
+#
+#     mail(recipient, message)
+#

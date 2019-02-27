@@ -3,6 +3,7 @@ backend.py file containing functions that perform operations on data
 """
 import random
 
+
 def calc_score(request=None):
     """
     Calculates the score of a student who takes the questionnaire
@@ -73,7 +74,21 @@ def removeUser(session=None):
     del session['otp_validated']
     del session['otp_sent']
 
-    print('REMOVE USER FUNCTION\n\n')
-    print('otp_sent' in session)
-    print('\n\n')
+
+## Might be used in future when we have better translation between webpage and pdf. Not to be used until then
+# def convertFormToPDF(url, session):
+#     options = {
+#         'page-size': 'A4',
+#         'margin-top': '0.75in',
+#         'margin-right': '0.75in',
+#         'margin-bottom': '0.75in',
+#         'margin-left': '0.75in',
+#     }
+#
+#     if 'windows' == platform.system().lower():
+#         wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'  # while running on windows change this path
+#         config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+#         pdfkit.from_url(url, 'static/submissions/' + session['sid'] + '.pdf', options=options, configuration=config)
+#     else:
+#         pdfkit.from_url(url, 'static/submissions/' + session['sid'] + '.pdf', options=options)
 
