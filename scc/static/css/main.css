@@ -199,8 +199,7 @@ iframe {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-evenly;
   padding: 177px 130px 33px 95px;
 }
 

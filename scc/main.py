@@ -4,7 +4,7 @@ from config.configuration import Configuration
 from flask import Flask, render_template, redirect, url_for, request, session
 
 
-app = Flask('scc')
+app = Flask(__name__)
 
 
 # initializing config variables
@@ -37,39 +37,56 @@ def index():
 
 @app.route(__create_URL(LOGIN), methods=['GET', 'POST'])
 def login():
+    if 'otp_retry_count' in session and session['otp_retry_count'] > 0:
+        return redirect(url_for(OTP, otp_retry_count=session['otp_retry_count']), code=303)
+    elif 'on_form_page' in session and session['on_form_page'] is True:
+        return redirect(url_for(DASS21), code=303)
+
     return render_template('index.html', OTP=OTP)
 
+
+#TODO mail otp asynchronously
 
 @app.route(__create_URL(OTP), methods=['GET', 'POST'])
 def otp():
     if request.method == 'POST':
 
-        if 'otp_correct' in session and session['otp_correct'] is False:
+        if 'otp_retry_count' in session and session['otp_retry_count'] > 0:
             return render_template('otp.html', DASS21=DASS21)
         else:
             backend.addUser(request, session)
-            session['otp'] = backend.generateOTP()
-            mailing.mailOTP(session=session, otp=session['otp'])
+            otp_gen = backend.generateOTP()
+            salt = config['salt']
+            session['otp'] = backend.encrypt(otp_gen, salt)
+            mailing.mailOTP(session=session, otp=otp_gen)
             session['otp_sent'] = True
-            session['otp_correct'] = True
 
             return render_template('otp.html', DASS21=DASS21)
     else:
+        if 'otp_retry_count' in session and session['otp_retry_count'] > 0:
+            return render_template('otp.html', DASS21=DASS21)
+
         return redirect(url_for(LOGIN), code=302)
 
 
 @app.route(__create_URL(DASS21), methods=['GET', 'POST'])
 def dass21():
     if request.method == 'POST':
-        if 'otp' in session:
-            is_otp_correct = backend.validateOTP(request, session['otp'])
+        if 'otp' in session:    # otp will always be in session because there is no path otherwise
+            is_otp_correct = backend.validateOTP(request, session['otp'], salt=config['salt'])
             if is_otp_correct:
                 session['otp_validated'] = True
+                session['otp_retry_count'] = 0  # reset otp_retry_count
+                session['on_form_page'] = True
                 return render_template('dass21.html', SUBMISSION=SUBMISSION)
             else:
-                session['otp_correct'] = False
-                return redirect(url_for(OTP), code=307)
+                # session['otp_correct'] = False
+                session['otp_retry_count'] += 1
+                return redirect(url_for(OTP, otp_retry_count=session['otp_retry_count']), code=307)
     else:
+        if 'on_form_page' in session and session['on_form_page'] is True:
+            return render_template('dass21.html', SUBMISSION=SUBMISSION)
+
         return redirect(url_for(LOGIN), code=302)
 
 
@@ -78,6 +95,8 @@ def dass21():
 @app.route(__create_URL(SUBMISSION), methods=['GET', 'POST'])
 def submission():
     if request.method == 'POST':
+
+        session['on_form_page'] = False
 
         try:
             admin_email = config['mailing']['admin_email']
@@ -99,9 +118,10 @@ def submission():
 
 @app.route(__create_URL(SUCCESSFUL), methods=['GET', 'POST'])
 def suc_submission():
-    backend.removeUser(session)
 
     if request.method == 'POST':
+        if 'sid' in session:
+            backend.removeUser(session)
         return render_template('suc_submission.html')
     else:
         return redirect(url_for(LOGIN), code=302)
@@ -109,9 +129,10 @@ def suc_submission():
 
 @app.route(__create_URL(UNSUCCESSFUL), methods=['GET', 'POST'])
 def unsuc_submission():
-    backend.removeUser(session)
 
     if request.method == 'POST':
+        if 'sid' in session:
+            backend.removeUser(session)
         return render_template('unsuc_submission.html')
     else:
         return redirect(url_for(LOGIN), code=302)
@@ -121,6 +142,11 @@ def unsuc_submission():
 def page_not_found(err):
     return render_template('page_not_found.html'), 404
 
-#
+
+
 # if __name__ == '__main__':
 #     app.run(debug=True, host='localhost', port=5000)
+
+# TODO: session mgmt is almost complete just need to correct the url for otp and dass21 when the user opens again
+# TODO: Add a close button on the form in dass21 page
+# TODO: ask sonali to change the checking of entries in input fields to per character: make it aggressive

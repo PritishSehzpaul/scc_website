@@ -2,7 +2,7 @@
 backend.py file containing functions that perform operations on data
 """
 import random
-
+import hashlib
 
 def calc_score(request=None):
     """
@@ -38,12 +38,13 @@ def generateOTP():
     return random.SystemRandom().randint(100000, 999999)
 
 
-def validateOTP(request, otp):
+def validateOTP(request, hash_otp, salt):
     otp_entered = request.form.get('otp')
     if otp_entered is not None:
         try:
             otp_entered = int(otp_entered)
-            if otp == otp_entered:
+            hash_otp_entered = encrypt(otp_entered, salt)
+            if hash_otp == hash_otp_entered:
                 return True
             else:
                 return False
@@ -61,18 +62,22 @@ def addUser(request=None, session=None):
         session['name'] = request.form.get('name').strip()
         session['email'] = request.form.get('email').strip()
         session['contact'] = request.form.get('contact').strip()
+        session['otp_retry_count'] = 0
+        session['on_form_page'] = False
 
 
 def removeUser(session=None):
     if session is None:
         return None
 
-    del session['sid']
-    del session['email']
-    del session['contact']
-    del session['name']
-    del session['otp_validated']
-    del session['otp_sent']
+    session.clear()
+
+
+# TODO further look into key derivation algorithms like : pbkdf2_hmac, BLAKE
+def encrypt(s, salt):
+    h = hashlib.sha256()
+    h.update( str(s+salt).encode('utf-8') )
+    return h.hexdigest()
 
 
 ## Might be used in future when we have better translation between webpage and pdf. Not to be used until then
