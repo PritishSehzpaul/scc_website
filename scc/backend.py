@@ -4,6 +4,11 @@ backend.py file containing functions that perform operations on data
 import random
 import hashlib
 
+from config.app_logger import AppLogger
+
+# Set logger
+logger = AppLogger(__name__, AppLogger.DEBUG).logger
+
 def calc_score(request=None):
     """
     Calculates the score of a student who takes the questionnaire
@@ -40,17 +45,19 @@ def generateOTP():
 
 def validateOTP(request, hash_otp, salt):
     otp_entered = request.form.get('otp')
+    logger.info('Validating OTP...')
     if otp_entered is not None:
         try:
             otp_entered = int(otp_entered)
             hash_otp_entered = encrypt(otp_entered, salt)
             if hash_otp == hash_otp_entered:
+                logger.info('OTP is correct')
                 return True
             else:
+                logger.info('OTP is incorrect')
                 return False
         except ValueError as e:
-            print('{} cannot be converted to integer. Entered value contains a character.\nError: {}'
-                  .format(otp_entered, e))
+            logger.exception('OTP entered is: ' + otp_entered + '{} cannot be converted to integer'.format(otp_entered))
             return False
 
 
