@@ -53,10 +53,10 @@ def index():
 @app.route(__create_URL(LOGIN), methods=['GET', 'POST'])
 def login():
     if 'otp_retry_count' in session and session['otp_retry_count'] > 0:
-        logger.warning('Redirecting from \login\ to \otp\ as user is in session. \nSession: ' + repr(session))
+        logger.warning('Redirecting from \login\ to \otp\ as user is in session. Session: ' + repr(session))
         return redirect(url_for(OTP, otp_retry_count=session['otp_retry_count']), code=303)
     elif 'on_form_page' in session and session['on_form_page'] is True:
-        logger.warning('Redirecting from \login\ to \dass21\ form as user is in session. \nSession: ' + repr(session))
+        logger.warning('Redirecting from \login\ to \dass21\ form as user is in session. Session: ' + repr(session))
         return redirect(url_for(DASS21), code=303)
 
     return render_template('index.html', OTP=OTP)
@@ -73,19 +73,19 @@ def otp():
         else:
             logger.info('Creating user session...')
             backend.addUser(request, session)
-            logger.info('User session created')
+            logger.info('User session created. Session: ' + repr(session))
             logger.info('Generating and mailing OTP...')
             otp_gen = backend.generateOTP()
             salt = config['salt']
             session['otp'] = backend.encrypt(otp_gen, salt)
             mailing.mailOTP(session=session, otp=otp_gen)
             session['otp_sent'] = True
-            logger.info('OTP mailed.')
+            logger.info('OTP mailed. Session: ' + repr(session))
 
             return render_template('otp.html', DASS21=DASS21)
     else:
         if 'otp_retry_count' in session and session['otp_retry_count'] > 0:
-            logger.warning('User is in session and loaded the /otp/ page using GET (from browser). \nSession: ' + repr(session))
+            logger.warning('User is in session and loaded the /otp/ page using GET (from browser). Session: ' + repr(session))
             return render_template('otp.html', DASS21=DASS21)
 
         return redirect(url_for(LOGIN), code=302)
@@ -104,11 +104,11 @@ def dass21():
                 return render_template('dass21.html', SUBMISSION=SUBMISSION)
             else:
                 session['otp_retry_count'] += 1
-                logger.info('Redirecting from \dass21\ to \otp\ as OTP is incorrect. \nSession: ' + repr(session))
+                logger.info('Redirecting from \dass21\ to \otp\ as OTP is incorrect. Session: ' + repr(session))
                 return redirect(url_for(OTP, otp_retry_count=session['otp_retry_count']), code=307)
     else:
         if 'on_form_page' in session and session['on_form_page'] is True:
-            logger.warning('User is in session and loaded \dass21\ using GET (from browser). \nSession: ' + repr(session))
+            logger.warning('User is in session and loaded \dass21\ using GET (from browser). Session: ' + repr(session))
             return render_template('dass21.html', SUBMISSION=SUBMISSION)
 
         return redirect(url_for(LOGIN), code=302)
@@ -147,7 +147,7 @@ def suc_submission():
 
     if request.method == 'POST':
         if 'sid' in session:
-            logger.info('Removing user from session. \nSession: ' + repr(session))
+            logger.info('Removing user from session. Session: ' + repr(session))
             backend.removeUser(session)
             logger.info('User removed')
         return render_template('suc_submission.html')
@@ -161,7 +161,7 @@ def unsuc_submission():
 
     if request.method == 'POST':
         if 'sid' in session:
-            logger.info('Removing user from session. \nSession: ' + repr(session))
+            logger.info('Removing user from session. Session: ' + repr(session))
             backend.removeUser(session)
             logger.info('User removed')
         return render_template('unsuc_submission.html')
