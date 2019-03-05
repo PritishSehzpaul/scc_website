@@ -1,11 +1,9 @@
 import smtplib
 import ssl
-from config.configuration import Configuration
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
 
+from config.configuration import Configuration
 
 # TODO add a check whether the email was received by the client
 
@@ -55,7 +53,7 @@ def mailOTP(session, otp):
     mail(recipient_email, message)
 
 
-def mailScore(session, recipient, score_set=None, comments=None,  subject='Score of Student'):
+def mailScore(session, recipient, score_set=None, comments=None, subject='Score of Student'):
     user_email = session['email']
     user_name = session['name']
     user_contact = session['contact']
@@ -115,7 +113,6 @@ def mailScore(session, recipient, score_set=None, comments=None,  subject='Score
     message.attach(html_part)
 
     mail(recipient, message)
-
 
 ## Might be used in future when we have better translation between webpage and pdf. Not to be used until then
 # def mailScore_PDF(session, recipient, score_set=None, comments=None,  subject='Score of Student'):

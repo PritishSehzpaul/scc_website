@@ -492,7 +492,6 @@ iframe {
 [ Responsive ]*/
 
 
-
 @media (max-width: 992px) {
   .wrap-login100 {
     padding: 177px 90px 33px 85px;
@@ -504,6 +503,10 @@ iframe {
 
   .login100-form {
     width: 50%;
+  }
+
+  .wrap-otp100{
+    padding: 177px 90px 33px 85px;
   }
 }
 
@@ -519,10 +522,18 @@ iframe {
   .login100-form {
     width: 100%;
   }
+
+  .wrap-otp100 {
+    padding: 100px 80px 33px 80px;
+  }
 }
 
 @media (max-width: 576px) {
   .wrap-login100 {
+    padding: 100px 15px 33px 15px;
+  }
+
+  .wrap-otp100 {
     padding: 100px 15px 33px 15px;
   }
 }
