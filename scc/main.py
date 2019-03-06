@@ -128,7 +128,7 @@ def submission():
             comments = request.form.get('comments')
             logger.info('Mailing result to admin')
             mailing.mailScore(session=session, recipient=admin_email, score_set=score_set,
-                              comments=comments, subject='Score of Student')
+                              comments=comments, subject=session['sid'] + ' | ' + session['name'] + ' | Website Result')
             logger.info('User submission is successful. Result mailed')
             return redirect(url_for('suc_submission'), code=307)    # code 307 will use the method originally used
             # for the route which calls redirect
